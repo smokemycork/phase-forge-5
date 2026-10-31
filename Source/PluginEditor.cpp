@@ -987,8 +987,9 @@ void PhaseForgeAudioProcessorEditor::drawHero (Graphics& g) const
 
     // ---- nudge row: labels + current shift -----------------------------------------------------
     const auto b0 = nudgeB[0].getBounds().toFloat(), b5 = nudgeB[5].getBounds().toFloat(), b2 = nudgeB[2].getBounds().toFloat(), b3 = nudgeB[3].getBounds().toFloat();
-    text (g, "<< EARLIER", Rectangle<float> (shiftK.getX() + S (6.0f), b0.getY(), b0.getX() - shiftK.getX() - S (10.0f), b0.getHeight()), S (12), pfui::pink(), Justification::centredLeft);
-    text (g, "LATER >>", Rectangle<float> (b5.getRight() + S (6.0f), b5.getY(), shiftK.getRight() - b5.getRight() - S (6.0f), b5.getHeight()), S (12), pfui::sky(), Justification::centredRight);
+    const auto sk = shiftK.getBounds().toFloat();
+    text (g, "<< EARLIER", Rectangle<float> (sk.getX() + S (6.0f), b0.getY(), b0.getX() - sk.getX() - S (10.0f), b0.getHeight()), S (12), pfui::pink(), Justification::centredLeft);
+    text (g, "LATER >>", Rectangle<float> (b5.getRight() + S (6.0f), b5.getY(), sk.getRight() - b5.getRight() - S (6.0f), b5.getHeight()), S (12), pfui::sky(), Justification::centredRight);
 
     const Rectangle<float> vb (b2.getRight() + S (16), b2.getY(), b3.getX() - b2.getRight() - S (32), b2.getHeight());
     g.setColour (pfui::ink());
@@ -1114,7 +1115,8 @@ void PhaseForgeAudioProcessorEditor::drawProPanel (Graphics& g) const
         const auto kb = k.s->getBounds().toFloat();
         text (g, k.name, Rectangle<float> (kb.getX(), kb.getY() - S (3), kb.getWidth(), S (13)), S (10.5f), pfui::cream().withAlpha (0.85f), Justification::centred);
     }
-    text (g, "KEY", Rectangle<float> (keyModeBox.getX() - S (30.0f), keyModeBox.getY(), S (28), keyModeBox.getHeight()), S (10.5f), pfui::sky(), Justification::centredRight);
+    const auto kb0 = keyModeBox.getBounds().toFloat();
+    text (g, "KEY", Rectangle<float> (kb0.getX() - S (30.0f), kb0.getY(), S (28), kb0.getHeight()), S (10.5f), pfui::sky(), Justification::centredRight);
 }
 
 void PhaseForgeAudioProcessorEditor::drawOverlap (Graphics& g, Rectangle<float> r) const
